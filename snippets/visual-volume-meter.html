@@ -7,14 +7,6 @@
     gap: 10px;
   }
 
-  .volume-buttons-wrap {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    align-items: center;
-    justify-content: flex-start;
-  }
-
   .volume-meter-panel {
     display: flex;
     flex-direction: column;
@@ -105,15 +97,11 @@
   }
 </style>
 <div class="volume-meter-wrap">
-  <div class="volume-buttons-wrap">
-    <button type="button" class="btn-secondary controlButton" action="volume_down">Volume Down</button>
-    <button type="button" class="btn-secondary controlButton" action="volume_up">Volume Up</button>
-  </div>
-
   <div class="volume-meter-panel">
     <div class="volume-meter-shell">
-      <div id="volumeMeter" class="volume-meter" aria-label="Current volume level"></div>
+      <div id="volumeMeter" class="volume-meter"></div>
     </div>
+
     <div class="volume-meter-footer">
       <div id="volumeMeterLabel" class="volume-meter-label">VOL 0%</div>
     </div>
