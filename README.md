@@ -13,9 +13,6 @@ This add-on is intended to be used with:
 1. Original StargateProject software:
    <https://github.com/jonnerd154/StargateProject-software>
 
-2. This Visual Volume Meter add-on:
-   <https://github.com/matelv-x/Visual-Volume-Meter>
-
 The add-on targets the standard SG1_v4 web debug page:
 
 ```text
@@ -30,6 +27,9 @@ The add-on targets the standard SG1_v4 web debug page:
 - live volume polling from `stargate/get/system_info`
 - volume up and volume down controls
 - automatic refresh after volume button presses
+
+<img width="679" height="212" alt="Screenshot 2026-05-16 at 05 31 25" src="https://github.com/user-attachments/assets/5fdf7bea-46e7-4b2d-8f29-a1bbdd4afe8b" />
+
 
 ## Included Files
 
