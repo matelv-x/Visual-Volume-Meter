@@ -54,8 +54,16 @@ else:
     snippet = installer_text[start + len(embedded_begin):stop].strip("\n")
 
 pattern = re.compile(re.escape(begin) + r".*?" + re.escape(end), re.DOTALL)
-if pattern.search(html):
-    html = pattern.sub(snippet, html, count=1)
+html = pattern.sub("", html)
+
+volume_up_button = re.compile(
+    r'(<button\b[^>]*\baction=["\']volume_up["\'][^>]*>.*?</button>)',
+    re.IGNORECASE | re.DOTALL,
+)
+match = volume_up_button.search(html)
+if match:
+    insert_at = match.end()
+    html = html[:insert_at] + "\n" + snippet + html[insert_at:]
 elif "</body>" in html:
     html = html.replace("</body>", snippet + "\n</body>", 1)
 elif "</html>" in html:
