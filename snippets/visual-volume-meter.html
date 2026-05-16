@@ -259,6 +259,28 @@
 
   $(function() {
     initialize_real_volume_meter();
+
+    $('button[action="volume_up"]').click(function() {
+      var next = Math.min(100, (lastVolumePercent || 0) + 5);
+
+      drawVolumeMeter(
+        next,
+        lastVolumePercent
+      );
+
+      lastVolumePercent = next;
+    });
+
+    $('button[action="volume_down"]').click(function() {
+      var next = Math.max(0, (lastVolumePercent || 0) - 5);
+
+      drawVolumeMeter(
+        next,
+        lastVolumePercent
+      );
+
+      lastVolumePercent = next;
+    });
   });
 </script>
 <!-- END STARGATE VISUAL VOLUME METER ADD-ON -->
