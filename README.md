@@ -25,8 +25,8 @@ The add-on targets the standard SG1_v4 web debug page:
 - low, mid, high, and max color zones
 - animated pulse feedback when volume changes
 - live volume polling from `stargate/get/system_info`
-- volume up and volume down controls
-- automatic refresh after volume button presses
+- synchronization with the existing volume up and volume down buttons
+- immediate visual feedback after volume button presses
 
 <img width="679" height="212" alt="Screenshot 2026-05-16 at 05 31 25" src="https://github.com/user-attachments/assets/5fdf7bea-46e7-4b2d-8f29-a1bbdd4afe8b" />
 
@@ -41,6 +41,8 @@ snippets/visual-volume-meter.html
 
 ## Installation
 
+### Option 1: Clone the repository
+
 Copy or clone this repository to the Raspberry Pi, then run:
 
 ```bash
@@ -48,6 +50,23 @@ cd /home/pi/Visual-Volume-Meter
 chmod +x install.sh restore.sh
 ./install.sh
 ```
+
+### Option 2: Copy only `install.sh`
+
+`install.sh` is self-contained. If you copy only this file to the Raspberry Pi,
+it can still install the Visual Volume Meter because it includes an embedded
+copy of the snippet.
+
+Example:
+
+```bash
+chmod +x install.sh
+./install.sh
+```
+
+When the `snippets/visual-volume-meter.html` file exists, the installer uses
+that file. When it does not exist, the installer automatically uses the embedded
+snippet inside `install.sh`.
 
 The installer modifies:
 
@@ -74,6 +93,14 @@ To restore the previous `debug.htm` from the latest backup:
 ```bash
 cd /home/pi/Visual-Volume-Meter
 ./restore.sh
+sudo systemctl restart stargate.service
+```
+
+If you copied only `install.sh`, restore manually from the backup path printed
+by the installer:
+
+```bash
+cp -a /home/pi/sg1_v4/web/debug.htm.bak-volume-meter-YYYYMMDD_HHMMSS /home/pi/sg1_v4/web/debug.htm
 sudo systemctl restart stargate.service
 ```
 
