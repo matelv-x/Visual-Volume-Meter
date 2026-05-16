@@ -202,6 +202,7 @@ __VISUAL_VOLUME_METER_SNIPPET_BEGIN__
 <script type="text/javascript">
   var lastVolumePercent = null;
   var volumePollInterval = null;
+  var volumeSyncTimeout = null;
   var volumeActionInProgress = false;
   var volumeRefreshToken = 0;
   var TOTAL_SEGMENTS = 20;
@@ -302,6 +303,13 @@ __VISUAL_VOLUME_METER_SNIPPET_BEGIN__
     }
   }
 
+  function clearVolumeSyncTimeout() {
+    if (volumeSyncTimeout) {
+      clearTimeout(volumeSyncTimeout);
+      volumeSyncTimeout = null;
+    }
+  }
+
   function resumeVolumePolling() {
     pauseVolumePolling();
     volumePollInterval = setInterval(function() {
@@ -309,26 +317,14 @@ __VISUAL_VOLUME_METER_SNIPPET_BEGIN__
     }, 2500);
   }
 
-  function runVolumeSyncSequence() {
-    var delays = [90, 180, 300, 460];
-    var stepIndex = 0;
+  function scheduleVolumeSync() {
+    clearVolumeSyncTimeout();
 
-    function nextStep() {
-      if (stepIndex >= delays.length) {
-        volumeActionInProgress = false;
-        refreshRealVolumeMeter({ force: true });
-        resumeVolumePolling();
-        return;
-      }
-
-      setTimeout(function() {
-        refreshRealVolumeMeter({ force: true });
-        stepIndex++;
-        nextStep();
-      }, delays[stepIndex]);
-    }
-
-    nextStep();
+    volumeSyncTimeout = setTimeout(function() {
+      volumeActionInProgress = false;
+      refreshRealVolumeMeter({ force: true });
+      resumeVolumePolling();
+    }, 800);
   }
 
   function initialize_real_volume_meter() {
@@ -340,39 +336,25 @@ __VISUAL_VOLUME_METER_SNIPPET_BEGIN__
     $('button[action="volume_up"], button[action="volume_down"]')
       .off('click.volumeMeter')
       .on('click.volumeMeter', function() {
+        var action = $(this).attr('action');
+        var current = lastVolumePercent;
+        if (current === null || current === undefined) current = 0;
+
+        var next = action === 'volume_up'
+          ? Math.min(100, current + 5)
+          : Math.max(0, current - 5);
+
         pauseVolumePolling();
-
-        if (volumeActionInProgress) return;
-
         volumeActionInProgress = true;
-        runVolumeSyncSequence();
+
+        drawVolumeMeter(next, lastVolumePercent);
+        lastVolumePercent = next;
+        scheduleVolumeSync();
       });
   }
 
   $(function() {
     initialize_real_volume_meter();
-
-    $('button[action="volume_up"]').click(function() {
-      var next = Math.min(100, (lastVolumePercent || 0) + 5);
-
-      drawVolumeMeter(
-        next,
-        lastVolumePercent
-      );
-
-      lastVolumePercent = next;
-    });
-
-    $('button[action="volume_down"]').click(function() {
-      var next = Math.max(0, (lastVolumePercent || 0) - 5);
-
-      drawVolumeMeter(
-        next,
-        lastVolumePercent
-      );
-
-      lastVolumePercent = next;
-    });
   });
 </script>
 <!-- END STARGATE VISUAL VOLUME METER ADD-ON -->
