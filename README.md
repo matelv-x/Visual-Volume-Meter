@@ -46,9 +46,13 @@ snippets/visual-volume-meter.html
 Copy or clone this repository to the Raspberry Pi, then run:
 
 ```bash
-cd /home/pi/Visual-Volume-Meter
+cd /home/pi
+unzip Visual-Volume-Meter-main.zip
+cd Visual-Volume-Meter-main
 chmod +x install.sh restore.sh
-./install.sh
+sudo ./install.sh
+sudo systemctl restart stargate.service
+
 ```
 
 ### Option 2: Copy only `install.sh`
