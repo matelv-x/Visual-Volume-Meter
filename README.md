@@ -1,42 +1,41 @@
-# Visual Volume Meter
+# Stargate Visual Volume Meter Add-on
 
-Adds a live segmented volume meter to the StargateProject debug page.
+Small Visual Volume Meter add-on for the StargateProject debug page.
 
 This repository is private while it is being checked and verified.
 
 ## Install
 
+Clone or unzip this add-on into `/home/pi`, then run:
+
 ```bash
-cd /home/pi/Stargate-Final_Patches
+cd /home/pi
 rm -rf Visual-Volume-Meter
 git clone https://github.com/matelv-x/Visual-Volume-Meter.git
 cd Visual-Volume-Meter
-chmod +x *.sh
-sudo ./install.sh /home/pi/sg1_v4
+chmod +x install.sh restore.sh
+sudo ./install.sh
 sudo systemctl restart stargate.service
 ```
 
 ## Restore / uninstall
 
 ```bash
-cd /home/pi/Stargate-Final_Patches/Visual-Volume-Meter
-chmod +x restore.sh
-sudo ./restore.sh /home/pi/sg1_v4
+cd /home/pi/Visual-Volume-Meter
+sudo ./restore.sh
 sudo systemctl restart stargate.service
 ```
 
 ## What it changes
 
-- Adds a visual volume meter under Sound & Volume on debug.htm.
-- Reads audio_volume from the Stargate system info API.
-- Refreshes the meter after Volume Up and Volume Down actions.
+- Adds a 20-segment visual volume meter.
+- Polls `stargate/get/system_info`.
+- Patches `/home/pi/sg1_v4/web/debug.htm` only.
 
 ## Attribution and originality
 
 Original base project: StargateProject SG1 software from the BuildAStargate/Jordan/Kristian/Jonnerd project lineage.
 
-Additional source/idea credit: Idea and feature layer by Marcin/Codex, implemented as a patch over Jordan/Kristian/Jonnerd StargateProject SG1 web/debug files.
+Additional source/idea credit: Feature idea by Marcin/Codex over Jordan/Jonnerd StargateProject debug UI.
 
-How much is copied or changed: Small patch/overlay. It copies selected modified debug web files and a patch file; it is not a full copy of the base project.
-
-The included `*.patch` file, when present, shows the exact text-level changes against the base software used while packaging.
+How much is copied or changed: Small self-contained HTML/JS/CSS snippet patch.
