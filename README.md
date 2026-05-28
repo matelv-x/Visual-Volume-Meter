@@ -40,6 +40,9 @@ sudo systemctl restart stargate.service
 
 ## What it changes
 
+<img width="666" height="212" alt="25%" src="https://github.com/user-attachments/assets/2f7d1a8f-37c0-426f-b7e1-7995df83ca6a" />
+<img width="655" height="211" alt="100%" src="https://github.com/user-attachments/assets/092e86f0-fd19-4e66-b8bf-c644b2369e96" />
+
 - Adds a 20-segment visual volume meter.
 - Polls `stargate/get/system_info`.
 - Patches `/home/pi/sg1_v4/web/debug.htm` only.
