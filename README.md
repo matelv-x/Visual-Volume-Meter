@@ -22,7 +22,7 @@ sudo systemctl restart stargate.service
 
 /home/pi/Visual-Volume-Meter
 
-3. Then run:
+2. Then run:
 
 ```bash
 cd /home/pi/Visual-Volume-Meter
