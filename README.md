@@ -1,12 +1,11 @@
 # Stargate Visual Volume Meter Add-on
 
 Small Visual Volume Meter add-on for the StargateProject debug page.
-
-This repository is private while it is being checked and verified.
+https://github.com/jonnerd154/StargateProject-software
 
 ## Install
 
-Clone or unzip this add-on into `/home/pi`, then run:
+## Method 1 — GitHub Clone (Recommended)
 
 ```bash
 cd /home/pi
@@ -17,7 +16,20 @@ chmod +x install.sh restore.sh
 sudo ./install.sh
 sudo systemctl restart stargate.service
 ```
+## Method 2 — ZIP Download
 
+1. Download and extract the ZIP archive into:
+
+/home/pi/Visual-Volume-Meter
+
+3. Then run:
+
+```bash
+cd /home/pi/Visual-Volume-Meter
+chmod +x install.sh restore.sh
+sudo ./install.sh
+sudo systemctl restart stargate.service
+```
 ## Restore / uninstall
 
 ```bash
