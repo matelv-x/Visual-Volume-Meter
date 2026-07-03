@@ -2,7 +2,7 @@
 
 [![Downloads](https://img.shields.io/github/downloads/matelv-x/Visual-Volume-Meter/total?label=downloads)](https://github.com/matelv-x/Visual-Volume-Meter/releases)
 
-Small Visual Volume Meter add-on for the StargateProject debug page.
+Small Visual Volume Meter, add-on for the StargateProject debug page.
 https://github.com/jonnerd154/StargateProject-software
 
 ## Install
